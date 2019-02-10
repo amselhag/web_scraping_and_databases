@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Mars</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="jumbotron text-center">
+            <h1>Mission to Mars</h1>
+            <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a></p>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+                <h2>Latest Mars News</h2>
+                <h4>{{data_scraped.article_titles}}</h4>
+                <p>{{data_scraped.article_description}}</p>
+                <br>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-7 col-sm-12">
+                <h2>Featured Mars Image</h2>
+                <img src={{data_scraped.featured_url}} class="img-fluid" style="width:600px;height:400px" alt="Featured_image">
+            </div>
+
+            <div class="col-md-5 col-sm-12">
+                <h3>Current Weather on Mars</h3>
+                <p>{{data_scraped.weather}}</p>
+
+                <h3>Mars Facts</h3>
+                {{ data_scraped.facts|safe }}
+
+            </div>
+        </div>
+        <div class="row">
+            <h2 style="text-align:center">Mars Hemispheres</h2>
+        </div>
+
+        <div class="row">
+            {% for items in data_scraped.hemis_data %}
+            <div class="col-md-6 col-sm-3 col-xs-3">
+                <img src={{items.img_urls}} class="img-thumbnail">
+                <h4>{{items.title}}</h4>
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+</body>
+
+</html>
